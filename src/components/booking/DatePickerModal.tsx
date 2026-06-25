@@ -14,9 +14,9 @@ import {
 } from 'date-fns'
 import { de as deLocale } from 'date-fns/locale'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-interface DatePickerModalProps {
+interface DatePickerDropdownProps {
   open: boolean
   onClose: () => void
   value: string
@@ -41,13 +41,13 @@ function MonthGrid({
   const weekDays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
 
   return (
-    <div className="flex-1 min-w-[240px]">
-      <h4 className="text-center font-semibold text-gray-800 mb-3 capitalize">
+    <div className="flex-1 min-w-[200px]">
+      <h4 className="text-center font-semibold text-gray-800 mb-2 capitalize text-sm">
         {format(month, 'MMMM yyyy', { locale: deLocale })}
       </h4>
       <div className="grid grid-cols-7 gap-0.5 mb-1">
         {weekDays.map((d) => (
-          <div key={d} className="text-center text-xs font-semibold text-aml-blue py-1">
+          <div key={d} className="text-center text-[10px] font-semibold text-aml-blue py-0.5">
             {d}
           </div>
         ))}
@@ -64,7 +64,7 @@ function MonthGrid({
               type="button"
               disabled={disabled}
               onClick={() => onSelect(day)}
-              className={`aspect-square text-sm rounded-full transition-colors ${
+              className={`aspect-square text-xs rounded-full transition-colors ${
                 isSelected
                   ? 'bg-aml-blue text-white font-bold'
                   : inMonth
@@ -83,11 +83,27 @@ function MonthGrid({
   )
 }
 
-export function DatePickerModal({ open, onClose, value, onChange, label }: DatePickerModalProps) {
+export function DatePickerDropdown({
+  open,
+  onClose,
+  value,
+  onChange,
+  label,
+}: DatePickerDropdownProps) {
   const selected = value ? parseISO(value) : null
   const [viewMonth, setViewMonth] = useState(selected ?? new Date())
+  const ref = useRef<HTMLDivElement>(null)
   const minDate = new Date()
   minDate.setHours(0, 0, 0, 0)
+
+  useEffect(() => {
+    if (!open) return
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose()
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [open, onClose])
 
   const handleSelect = (d: Date) => {
     onChange(format(d, 'yyyy-MM-dd'))
@@ -97,40 +113,40 @@ export function DatePickerModal({ open, onClose, value, onChange, label }: DateP
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative bg-white rounded-xl shadow-2xl p-6 max-w-[560px] w-full">
-        <p className="text-sm text-aml-blue font-medium mb-4">{label}</p>
-        <div className="flex items-center justify-between mb-4">
-          <button
-            type="button"
-            onClick={() => setViewMonth(subMonths(viewMonth, 1))}
-            className="p-1 hover:bg-aml-grey rounded"
-          >
-            <ChevronLeft className="w-5 h-5 text-aml-blue" />
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMonth(addMonths(viewMonth, 1))}
-            className="p-1 hover:bg-aml-grey rounded"
-          >
-            <ChevronRight className="w-5 h-5 text-aml-blue" />
-          </button>
-        </div>
-        <div className="flex gap-6 flex-col sm:flex-row">
-          <MonthGrid
-            month={viewMonth}
-            selected={selected}
-            onSelect={handleSelect}
-            minDate={minDate}
-          />
-          <MonthGrid
-            month={addMonths(viewMonth, 1)}
-            selected={selected}
-            onSelect={handleSelect}
-            minDate={minDate}
-          />
-        </div>
+    <div
+      ref={ref}
+      className="absolute top-full left-0 mt-1 z-50 bg-white rounded-lg shadow-xl border border-gray-200 p-4 w-max min-w-full max-w-[min(calc(100vw-2rem),520px)]"
+    >
+      <p className="text-xs text-aml-blue font-medium mb-3">{label}</p>
+      <div className="flex items-center justify-between mb-2">
+        <button
+          type="button"
+          onClick={() => setViewMonth(subMonths(viewMonth, 1))}
+          className="p-1 hover:bg-aml-grey rounded"
+        >
+          <ChevronLeft className="w-4 h-4 text-aml-blue" />
+        </button>
+        <button
+          type="button"
+          onClick={() => setViewMonth(addMonths(viewMonth, 1))}
+          className="p-1 hover:bg-aml-grey rounded"
+        >
+          <ChevronRight className="w-4 h-4 text-aml-blue" />
+        </button>
+      </div>
+      <div className="flex gap-4 flex-col sm:flex-row overflow-x-auto">
+        <MonthGrid
+          month={viewMonth}
+          selected={selected}
+          onSelect={handleSelect}
+          minDate={minDate}
+        />
+        <MonthGrid
+          month={addMonths(viewMonth, 1)}
+          selected={selected}
+          onSelect={handleSelect}
+          minDate={minDate}
+        />
       </div>
     </div>
   )
