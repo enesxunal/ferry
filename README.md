@@ -38,13 +38,15 @@ npm run preview
 - Tailwind CSS 4
 - React Router
 
-## Hinweis
+## Note
 
-API-Anbindung und Excel-Limandaten sind noch nicht integriert — aktuell Mock-Daten.
+API connection and port data from Excel are not integrated yet — currently using mock data.
+
+For the full client questionnaire, see **[CLIENT_QUESTIONS.md](./CLIENT_QUESTIONS.md)** (English).
 
 ---
 
-## Questions for the Client
+## Questions for the Client (summary)
 
 Please answer these questions so we can connect the frontend to your real system.
 
