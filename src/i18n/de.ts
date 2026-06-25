@@ -1,0 +1,187 @@
+export const de = {
+  siteName: 'Ferry Booking',
+  tagline: 'Ihre Plattform zum Fähre buchen und Vergleichen',
+
+  tripType: {
+    roundtrip: 'Hin- und Rückfahrt',
+    oneway: 'Einfache Fahrt',
+  },
+
+  outbound: 'Hinfahrt',
+  return: 'Rückfahrt',
+
+  route: {
+    from: 'Abfahrtshafen',
+    to: 'Ankunftshafen',
+    selectFrom: 'Wählen Sie die Hinfahrt',
+    selectTo: 'Wählen Sie den Zielhafen',
+    selectReturnFrom: 'Wählen Sie die Rückfahrt',
+    selectReturnTo: 'Wählen Sie den Rückfahrtszielhafen',
+  },
+
+  date: {
+    outbound: 'Hinfahrtsdatum',
+    return: 'Rückfahrtsdatum',
+    select: 'Wählen Sie das Abreisedatum',
+    sameDayRequired: 'Für die gewählte Strecke ist es erforderlich, die Rückfahrt am selben Tag zu buchen.',
+    returnRequired: 'Für die gewählte Strecke ist es erforderlich, gleichzeitig auch die Rückfahrt zu buchen.',
+  },
+
+  travelDetails: 'Reisedetails',
+  discounts: 'Rabatte',
+  familyDiscount: 'Haben Sie eine Familienbonifikation?',
+  residentTariff: 'Tarif für Residenten?',
+  yes: 'Ja',
+  no: 'Nein',
+  confirm: 'Bestätigen',
+
+  passengers: {
+    title: 'Passagiere',
+    add: 'Passagiere hinzufügen',
+    select: 'Wählen Sie die Passagiere aus',
+    adults: 'Erwachsene ab 12 J.a.',
+    youths: 'Jugendlicher von 12 bis 26 J.a.',
+    seniors: 'Senior ab 60 J.a.',
+    children: 'Kinder von 4 bis 11 J.a.',
+    infants: 'Kleinkinder bis 3 J.a.',
+    pets: 'Haustiere',
+    petNote:
+      'Bringen Sie Ihr Haustier in die Kabine, indem Sie im nächsten Schritt die Option „Haustierzugang" auswählen.',
+    minAdult: 'Geben Sie mindestens einen erwachsenen Passagier an.',
+    childAges: 'Geben Sie das Alter aller Kinder an.',
+    childAge: 'Alter Kind',
+    groupWarning:
+      'Sind Sie eine Gruppe mit mehr als 9 Passagieren? Um Buchungen für mehr als 9 Passagiere vorzunehmen, müssen Sie das Gruppenanfrageformular ausfüllen.',
+    useSameForReturn: 'Verwenden Sie die gleichen Daten wie für die Hinfahrt',
+    confirmData: 'PASSAGIERDATEN BESTÄTIGEN',
+  },
+
+  vehicle: {
+    title: 'Fahrzeug',
+    hasVehicle: 'Haben Sie ein Fahrzeug?',
+    required: 'Fahrzeug auf dieser Strecke erforderlich.',
+    type: 'Fahrzeugtyp',
+    selectType: 'Wählen Sie einen Fahrzeugtyp aus',
+    quantity: 'Menge',
+    brandModel: 'Marke und Modell',
+    length: 'Länge (cm)',
+    height: 'Höhe (cm)',
+    dimensions: 'Geben Sie die Fahrzeugabmessungen ein',
+    trailer: 'Anhänger (optional)',
+    trailerDimensions: 'Geben Sie die Anhängerabmessungen ein',
+    bicycles: 'Fahrräder',
+    oneCarNote:
+      'Pro Ticket kann nur ein Auto hinzugefügt werden. Wenn Sie 2 Autos haben, machen Sie 2 Buchungen.',
+    busNote: 'Um Busse zu buchen, müssen Sie das Gruppenanfrageformular ausfüllen.',
+    useSameForReturn: 'Verwenden Sie die gleichen Daten für die Rückfahrt',
+    confirmData: 'FAHRZEUGDATEN BESTÄTIGEN',
+  },
+
+  discountCode: 'Rabattcode',
+  search: 'Preise vergleichen',
+
+  results: {
+    title: 'Verfügbare Überfahrten',
+    subtitle: 'Wählen Sie Ihre bevorzugte Verbindung',
+    outbound: 'Hinfahrt',
+    return: 'Rückfahrt',
+    select: 'Auswählen',
+    selected: 'Ausgewählt',
+    perPerson: 'pro Person',
+    duration: 'Dauer',
+    ship: 'Schiff',
+    amenities: 'Ausstattung',
+    notAvailable: 'Nicht verfügbar',
+    continue: 'Weiter zur Buchung',
+    noResults: 'Keine Überfahrten für die gewählten Daten gefunden.',
+    sortBy: 'Sortieren nach',
+    price: 'Preis',
+    departure: 'Abfahrt',
+    filters: 'Filter',
+  },
+
+  booking: {
+    title: 'Passagierdaten',
+    subtitle: 'Geben Sie die Daten aller Reisenden ein',
+    firstName: 'Vorname',
+    lastName: 'Nachname',
+    gender: 'Geschlecht',
+    birthPlace: 'Geburtsort',
+    birthDate: 'Geburtsdatum',
+    documentType: 'Dokumentart',
+    documentNumber: 'Dokumentnummer',
+    documentExpiry: 'Ablaufdatum',
+    nationality: 'Nationalität',
+    contact: 'Kontaktdaten',
+    email: 'E-Mail',
+    confirmEmail: 'E-Mail bestätigen',
+    phone: 'Telefon',
+    continue: 'Weiter zur Zahlung',
+    passenger: 'Passagier',
+    adult: 'Erwachsener',
+    youth: 'Jugendlicher',
+    senior: 'Senior',
+    child: 'Kind',
+    infant: 'Kleinkind',
+  },
+
+  payment: {
+    title: 'Zahlung',
+    subtitle: 'Schließen Sie Ihre Buchung sicher ab',
+    summary: 'Buchungsübersicht',
+    cardHolder: 'Karteninhaber',
+    cardNumber: 'Kartennummer',
+    expiry: 'Ablaufdatum',
+    cvv: 'CVV',
+    total: 'Gesamtbetrag',
+    pay: 'Jetzt bezahlen',
+    secure: 'Ihre Zahlung wird mit höchsten Sicherheitsstandards verarbeitet.',
+    outbound: 'Hinfahrt',
+    return: 'Rückfahrt',
+    passengers: 'Passagiere',
+    vehicle: 'Fahrzeug',
+    discount: 'Rabatt',
+  },
+
+  confirmation: {
+    title: 'Buchung bestätigt!',
+    subtitle: 'Ihre Fährtickets wurden erfolgreich gebucht.',
+    reference: 'Buchungsnummer',
+    emailSent: 'Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet.',
+    newBooking: 'Neue Buchung',
+    download: 'E-Ticket herunterladen',
+  },
+
+  steps: {
+    search: 'Suche',
+    select: 'Abfahrten',
+    details: 'Daten & Zahlung',
+    payment: 'Zahlung',
+    confirm: 'Bestätigung',
+  },
+
+  nav: {
+    destinations: 'Reiseziele',
+    freight: 'Güterverkehr',
+    account: 'Benutzerbereich',
+    help: 'Hilfe',
+  },
+
+  footer: {
+    about: 'Über Uns',
+    contact: 'Kontakte',
+    terms: 'Verkaufsbedingungen',
+    privacy: 'Privacy policy',
+    faq: 'FAQ',
+  },
+
+  validation: {
+    required: 'Dieses Feld ist erforderlich',
+    selectRoute: 'Bitte wählen Sie Abfahrt und Ankunft',
+    selectDate: 'Bitte wählen Sie ein Datum',
+    emailMismatch: 'E-Mail-Adressen stimmen nicht überein',
+    minPassengers: 'Mindestens ein Erwachsener erforderlich',
+  },
+} as const
+
+export type Translations = typeof de
