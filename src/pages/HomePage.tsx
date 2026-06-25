@@ -1,6 +1,7 @@
 import { Star } from 'lucide-react'
 import { BookingWidget } from '../components/booking/BookingWidget'
 import { ExcursionsSection } from '../components/home/ExcursionsSection'
+import { TopDestinationsSection } from '../components/home/TopDestinationsSection'
 import { MediterraneanMap } from '../components/map/MediterraneanMap'
 
 const reviews = [
@@ -21,6 +22,8 @@ export function HomePage() {
           <BookingWidget />
         </div>
       </section>
+
+      <TopDestinationsSection />
 
       <ExcursionsSection />
 
