@@ -9,9 +9,19 @@ interface VehicleSelectorProps {
   vehicle: VehicleData
   onChange: (vehicle: VehicleData) => void
   onConfirm: () => void
+  showReturnCheckbox?: boolean
+  useSameForReturn?: boolean
+  onUseSameForReturnChange?: (v: boolean) => void
 }
 
-export function VehicleSelector({ vehicle, onChange, onConfirm }: VehicleSelectorProps) {
+export function VehicleSelector({
+  vehicle,
+  onChange,
+  onConfirm,
+  showReturnCheckbox,
+  useSameForReturn,
+  onUseSameForReturnChange,
+}: VehicleSelectorProps) {
   const update = (partial: Partial<VehicleData>) => {
     onChange({ ...vehicle, ...partial })
   }
@@ -138,9 +148,21 @@ export function VehicleSelector({ vehicle, onChange, onConfirm }: VehicleSelecto
         />
       </div>
 
-      <Button onClick={onConfirm} size="sm" className="w-full">
+      <Button onClick={onConfirm} size="lg" className="w-full uppercase tracking-wide text-sm">
         {de.vehicle.confirmData}
       </Button>
+
+      {showReturnCheckbox && (
+        <label className="flex items-start gap-2 text-xs text-gray-600 cursor-pointer mt-4">
+          <input
+            type="checkbox"
+            checked={useSameForReturn}
+            onChange={(e) => onUseSameForReturnChange?.(e.target.checked)}
+            className="accent-aml-blue mt-0.5"
+          />
+          {de.vehicle.useSameForReturn}
+        </label>
+      )}
     </div>
   )
 }

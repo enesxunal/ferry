@@ -9,8 +9,8 @@ import { Button } from '../ui/Button'
 import { DatePickerDropdown } from './DatePickerModal'
 import { PassengerSelector } from './PassengerSelector'
 import { RouteFieldButton, RoutePickerDropdown } from './RoutePickerModal'
+import { FormPanel } from './FormPanel'
 import { VehicleSelector } from './VehicleSelector'
-import { Modal } from '../ui/Modal'
 
 type ModalType = 'outboundRoute' | 'returnRoute' | 'outboundDate' | 'returnDate' | 'passengers' | 'vehicle' | null
 
@@ -223,7 +223,7 @@ export function BookingWidget() {
         </Button>
       </div>
 
-      <Modal
+      <FormPanel
         open={activeModal === 'passengers'}
         onClose={() => setActiveModal(null)}
         title={de.passengers.select}
@@ -233,20 +233,12 @@ export function BookingWidget() {
           childAges={booking.outbound.childAges}
           onChange={(passengers, childAges) => updateOutbound({ passengers, childAges })}
           onConfirm={() => setActiveModal(null)}
+          showReturnCheckbox={booking.tripType === 'roundtrip'}
+          useSameForReturn={booking.useSamePassengersForReturn}
+          onUseSameForReturnChange={(v) => updateSearch({ useSamePassengersForReturn: v })}
         />
-        {booking.tripType === 'roundtrip' && (
-          <label className="flex items-center gap-2 text-sm mt-4 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={booking.useSamePassengersForReturn}
-              onChange={(e) => updateSearch({ useSamePassengersForReturn: e.target.checked })}
-              className="accent-aml-blue"
-            />
-            {de.passengers.useSameForReturn}
-          </label>
-        )}
-      </Modal>
-      <Modal
+      </FormPanel>
+      <FormPanel
         open={activeModal === 'vehicle'}
         onClose={() => setActiveModal(null)}
         title={de.vehicle.hasVehicle}
@@ -255,19 +247,11 @@ export function BookingWidget() {
           vehicle={booking.outbound.vehicle}
           onChange={(vehicle) => updateOutbound({ vehicle })}
           onConfirm={() => setActiveModal(null)}
+          showReturnCheckbox={booking.tripType === 'roundtrip'}
+          useSameForReturn={booking.useSameVehicleForReturn}
+          onUseSameForReturnChange={(v) => updateSearch({ useSameVehicleForReturn: v })}
         />
-        {booking.tripType === 'roundtrip' && (
-          <label className="flex items-center gap-2 text-sm mt-4 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={booking.useSameVehicleForReturn}
-              onChange={(e) => updateSearch({ useSameVehicleForReturn: e.target.checked })}
-              className="accent-aml-blue"
-            />
-            {de.vehicle.useSameForReturn}
-          </label>
-        )}
-      </Modal>
+      </FormPanel>
     </div>
   )
 }
