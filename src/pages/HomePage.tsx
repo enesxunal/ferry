@@ -1,6 +1,6 @@
 import { Star } from 'lucide-react'
 import { BookingWidget } from '../components/booking/BookingWidget'
-import { MediterraneanMap } from '../components/map/MediterraneanMap'
+import { HeroBackgroundSlider } from '../components/hero/HeroBackgroundSlider'
 
 const reviews = [
   { name: 'Oliver', text: 'Gute Menüführung' },
@@ -11,13 +11,9 @@ const reviews = [
 export function HomePage() {
   return (
     <div>
-      <section className="relative min-h-[560px] overflow-hidden bg-white">
-        {/* Map — only on the right side */}
-        <div className="absolute inset-y-0 right-0 w-full md:w-[65%] lg:w-[60%]">
-          <MediterraneanMap />
-        </div>
+      <section className="relative min-h-[560px] overflow-hidden">
+        <HeroBackgroundSlider />
 
-        {/* Form — left side */}
         <div className="relative z-10 max-w-6xl mx-auto px-4 py-8 md:py-10">
           <BookingWidget />
         </div>
