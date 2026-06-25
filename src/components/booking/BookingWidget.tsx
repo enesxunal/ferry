@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useBooking } from '../../context/BookingContext'
 import { vehicleTypes, getRouteLabel } from '../../data/mockPorts'
 import { formatGermanDate } from '../../data/mockFerries'
+import { formatPassengerSummary } from '../../utils/passengerSummary'
 import { de } from '../../i18n/de'
 import { Button } from '../ui/Button'
 import { DatePickerDropdown } from './DatePickerModal'
@@ -13,16 +14,6 @@ import { FormPanel } from './FormPanel'
 import { VehicleSelector } from './VehicleSelector'
 
 type ModalType = 'outboundRoute' | 'returnRoute' | 'outboundDate' | 'returnDate' | 'passengers' | 'vehicle' | null
-
-function passengerSummary(p: ReturnType<typeof useBooking>['booking']['outbound']['passengers']) {
-  const parts: string[] = []
-  const total = p.adults + p.youths + p.seniors + p.children + p.infants
-  if (total === 1) parts.push('1 Passagier')
-  else if (total > 0) parts.push(`${total} Passagiere`)
-  if (p.pets === 1) parts.push('1 Tier')
-  else if (p.pets > 1) parts.push(`${p.pets} Tiere`)
-  return parts.join(', ') || de.passengers.add
-}
 
 function vehicleSummary(v: ReturnType<typeof useBooking>['booking']['outbound']['vehicle']) {
   if (!v.hasVehicle) return de.no
@@ -201,7 +192,7 @@ export function BookingWidget() {
             <RouteFieldButton
               label={de.passengers.title}
               sublabel={de.passengers.add}
-              value={passengerSummary(booking.outbound.passengers)}
+                value={formatPassengerSummary(booking.outbound.passengers)}
               onClick={() => toggle('passengers')}
               active={activeModal === 'passengers'}
               icon={<Users className="w-5 h-5" />}

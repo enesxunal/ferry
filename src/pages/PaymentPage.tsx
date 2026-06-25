@@ -47,7 +47,11 @@ export function PaymentPage() {
       <Stepper currentStep={3} />
 
       <h1 className="text-2xl font-bold text-aml-blue mb-1">{de.payment.title}</h1>
-      <p className="text-gray-500 text-sm mb-6">{de.payment.subtitle}</p>
+      <p className="text-gray-500 text-sm mb-4">{de.payment.subtitle}</p>
+
+      <div className="bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 mb-6 text-sm text-amber-900">
+        Prototyp: Keine echte Zahlung. Kartendaten werden nicht verarbeitet oder gespeichert.
+      </div>
 
       <div className="grid md:grid-cols-5 gap-6">
         <div className="md:col-span-3 space-y-4">

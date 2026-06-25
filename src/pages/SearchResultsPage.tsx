@@ -8,21 +8,13 @@ import { Stepper } from '../components/ui/Stepper'
 import { useBooking } from '../context/BookingContext'
 import { getPortName, searchFerries } from '../data/mockFerries'
 import { getRouteLabel, ports } from '../data/mockPorts'
+import { formatPassengerSummaryDetailed } from '../utils/passengerSummary'
 import { de } from '../i18n/de'
-
-function buildPassengerSummary(booking: ReturnType<typeof useBooking>['booking']) {
-  const p = booking.outbound.passengers
-  const parts: string[] = []
-  const total = p.adults + p.youths + p.seniors + p.children + p.infants
-  if (total) parts.push(`${total} Passagier${total > 1 ? '' : ''}`)
-  if (p.pets) parts.push(`${p.pets} Haustier${p.pets > 1 ? 'e' : ''}`)
-  if (booking.outbound.vehicle.hasVehicle) parts.push('Auto')
-  return parts.join(', ') || '1 Passagier'
-}
 
 export function SearchResultsPage() {
   const navigate = useNavigate()
-  const { booking, selectFerry, updateOutbound, updateReturnLeg } = useBooking()
+  const { booking, selectFerry, updateOutbound, updateReturnLeg, clearFerrySelection } =
+    useBooking()
   const [outboundDate, setOutboundDate] = useState(booking.outbound.date)
   const [returnDate, setReturnDate] = useState(booking.returnLeg.date)
 
@@ -51,11 +43,13 @@ export function SearchResultsPage() {
   const handleOutboundDateChange = (date: string) => {
     setOutboundDate(date)
     updateOutbound({ date })
+    clearFerrySelection('outbound')
   }
 
   const handleReturnDateChange = (date: string) => {
     setReturnDate(date)
     updateReturnLeg({ date })
+    clearFerrySelection('return')
   }
 
   const total =
@@ -67,7 +61,7 @@ export function SearchResultsPage() {
     booking.selectedFerries.outbound &&
     (booking.tripType === 'oneway' || booking.selectedFerries.return)
 
-  const passengerSummary = buildPassengerSummary(booking)
+  const passengerSummary = formatPassengerSummaryDetailed(booking)
 
   return (
     <div className="pb-28">

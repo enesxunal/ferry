@@ -20,6 +20,7 @@ interface BookingContextValue {
   updatePayment: (payment: Partial<FullBooking['payment']>) => void
   completeBooking: () => string
   resetBooking: () => void
+  clearFerrySelection: (leg: 'outbound' | 'return' | 'all') => void
 }
 
 const BookingContext = createContext<BookingContextValue | null>(null)
@@ -83,6 +84,18 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     setBooking(defaultFullBooking())
   }, [])
 
+  const clearFerrySelection = useCallback((leg: 'outbound' | 'return' | 'all') => {
+    setBooking((prev) => {
+      if (leg === 'all') {
+        return { ...prev, selectedFerries: { outbound: null, return: null } }
+      }
+      return {
+        ...prev,
+        selectedFerries: { ...prev.selectedFerries, [leg]: null },
+      }
+    })
+  }, [])
+
   const value = useMemo(
     () => ({
       booking,
@@ -95,6 +108,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
       updatePayment,
       completeBooking,
       resetBooking,
+      clearFerrySelection,
     }),
     [
       booking,
@@ -107,6 +121,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
       updatePayment,
       completeBooking,
       resetBooking,
+      clearFerrySelection,
     ],
   )
 
