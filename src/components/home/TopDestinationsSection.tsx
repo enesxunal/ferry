@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight } from '@phosphor-icons/react'
 import { topDestinations } from '../../data/topDestinations'
 
 export function TopDestinationsSection() {

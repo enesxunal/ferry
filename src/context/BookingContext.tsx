@@ -17,7 +17,6 @@ interface BookingContextValue {
   selectFerry: (ferry: FerryOffer) => void
   setPassengers: (passengers: PassengerInfo[]) => void
   updateContact: (contact: Partial<FullBooking['contact']>) => void
-  updatePayment: (payment: Partial<FullBooking['payment']>) => void
   completeBooking: () => string
   resetBooking: () => void
   clearFerrySelection: (leg: 'outbound' | 'return' | 'all') => void
@@ -67,13 +66,6 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     }))
   }, [])
 
-  const updatePayment = useCallback((payment: Partial<FullBooking['payment']>) => {
-    setBooking((prev) => ({
-      ...prev,
-      payment: { ...prev.payment, ...payment },
-    }))
-  }, [])
-
   const completeBooking = useCallback(() => {
     const ref = `FB-${Date.now().toString(36).toUpperCase()}`
     setBooking((prev) => ({ ...prev, bookingReference: ref }))
@@ -105,7 +97,6 @@ export function BookingProvider({ children }: { children: ReactNode }) {
       selectFerry,
       setPassengers,
       updateContact,
-      updatePayment,
       completeBooking,
       resetBooking,
       clearFerrySelection,
@@ -118,7 +109,6 @@ export function BookingProvider({ children }: { children: ReactNode }) {
       selectFerry,
       setPassengers,
       updateContact,
-      updatePayment,
       completeBooking,
       resetBooking,
       clearFerrySelection,

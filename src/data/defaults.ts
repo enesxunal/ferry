@@ -4,7 +4,6 @@ import type {
   FullBooking,
   LegBooking,
   PassengerInfo,
-  PaymentInfo,
   SelectedFerries,
   VehicleData,
 } from '../types/booking'
@@ -47,13 +46,6 @@ export const defaultContact = (): ContactInfo => ({
   confirmEmail: '',
 })
 
-export const defaultPayment = (): PaymentInfo => ({
-  cardHolder: '',
-  cardNumber: '',
-  expiry: '',
-  cvv: '',
-})
-
 export const defaultSelectedFerries = (): SelectedFerries => ({
   outbound: null,
   return: null,
@@ -66,5 +58,4 @@ export const defaultFullBooking = (): FullBooking => ({
   selectedFerries: defaultSelectedFerries(),
   passengers: defaultPassengers(),
   contact: defaultContact(),
-  payment: defaultPayment(),
 })

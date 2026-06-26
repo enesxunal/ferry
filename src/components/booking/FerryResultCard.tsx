@@ -1,7 +1,8 @@
-import { format, parseISO } from 'date-fns'
+import { format } from 'date-fns'
 import { de as deLocale } from 'date-fns/locale'
-import { Info } from 'lucide-react'
+import { Info } from '@phosphor-icons/react'
 import type { FerryOffer } from '../../types/booking'
+import { parseValidISODate } from '../../utils/date'
 
 interface FerryResultCardProps {
   offer: FerryOffer
@@ -18,8 +19,13 @@ export function FerryResultCard({
   onSelect,
   passengerSummary,
 }: FerryResultCardProps) {
-  const dayLabel = format(parseISO(date), 'EEEE', { locale: deLocale }).toUpperCase().slice(0, 2)
-  const dateLabel = format(parseISO(date), 'dd MMMM', { locale: deLocale }).toUpperCase()
+  const parsedDate = parseValidISODate(date)
+  const dayLabel = parsedDate
+    ? format(parsedDate, 'EEEE', { locale: deLocale }).toUpperCase().slice(0, 2)
+    : ''
+  const dateLabel = parsedDate
+    ? format(parsedDate, 'dd MMMM', { locale: deLocale }).toUpperCase()
+    : ''
 
   return (
     <div

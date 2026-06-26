@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react'
+import { Star } from '@phosphor-icons/react'
 import { BookingWidget } from '../components/booking/BookingWidget'
 import { ExcursionsSection } from '../components/home/ExcursionsSection'
 import { TopDestinationsSection } from '../components/home/TopDestinationsSection'

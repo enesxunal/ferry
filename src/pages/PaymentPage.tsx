@@ -1,4 +1,4 @@
-import { CreditCard, Lock, Shield } from 'lucide-react'
+import { CreditCard, Lock, Shield } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
@@ -6,6 +6,20 @@ import { Input } from '../components/ui/Input'
 import { Stepper } from '../components/ui/Stepper'
 import { useBooking } from '../context/BookingContext'
 import { de } from '../i18n/de'
+
+interface PaymentForm {
+  cardHolder: string
+  cardNumber: string
+  expiry: string
+  cvv: string
+}
+
+const emptyPayment: PaymentForm = {
+  cardHolder: '',
+  cardNumber: '',
+  expiry: '',
+  cvv: '',
+}
 
 function calculateTotal(booking: ReturnType<typeof useBooking>['booking']): number {
   let total = 0
@@ -27,19 +41,67 @@ function calculateTotal(booking: ReturnType<typeof useBooking>['booking']): numb
   return Math.round(total * 100) / 100
 }
 
+function normalizeExpiryInput(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 4)
+  if (digits.length <= 2) return digits
+  return `${digits.slice(0, 2)}/${digits.slice(2)}`
+}
+
+function isExpiryValid(value: string): boolean {
+  const match = /^(\d{2})\/(\d{2})$/.exec(value)
+  if (!match) return false
+
+  const month = Number(match[1])
+  if (month < 1 || month > 12) return false
+
+  const year = 2000 + Number(match[2])
+  const expiryEnd = new Date(year, month, 0, 23, 59, 59)
+  return expiryEnd >= new Date()
+}
+
+function validatePayment(payment: PaymentForm): string[] {
+  const errors: string[] = []
+  const cardDigits = payment.cardNumber.replace(/\D/g, '')
+
+  if (!payment.cardHolder.trim()) {
+    errors.push(`${de.payment.cardHolder}: ${de.validation.required}`)
+  }
+  if (cardDigits.length < 12 || cardDigits.length > 19) {
+    errors.push(`${de.payment.cardNumber}: Bitte 12 bis 19 Ziffern eingeben`)
+  }
+  if (!isExpiryValid(payment.expiry)) {
+    errors.push(`${de.payment.expiry}: Bitte MM/JJ eingeben`)
+  }
+  if (!/^\d{3,4}$/.test(payment.cvv)) {
+    errors.push(`${de.payment.cvv}: Bitte 3 oder 4 Ziffern eingeben`)
+  }
+
+  return errors
+}
+
 export function PaymentPage() {
   const navigate = useNavigate()
-  const { booking, updatePayment, completeBooking } = useBooking()
+  const { booking, completeBooking } = useBooking()
+  const [payment, setPayment] = useState<PaymentForm>(emptyPayment)
+  const [errors, setErrors] = useState<string[]>([])
   const [processing, setProcessing] = useState(false)
 
   const total = calculateTotal(booking)
 
   const handlePay = async () => {
-    setProcessing(true)
-    await new Promise((r) => setTimeout(r, 1500))
-    completeBooking()
-    setProcessing(false)
-    navigate('/confirmation')
+    const validationErrors = validatePayment(payment)
+    setErrors(validationErrors)
+    if (validationErrors.length > 0) return
+
+    try {
+      setProcessing(true)
+      await new Promise((r) => setTimeout(r, 1500))
+      completeBooking()
+      setPayment(emptyPayment)
+      navigate('/confirmation')
+    } finally {
+      setProcessing(false)
+    }
   }
 
   return (
@@ -53,6 +115,16 @@ export function PaymentPage() {
         Prototyp: Keine echte Zahlung. Kartendaten werden nicht verarbeitet oder gespeichert.
       </div>
 
+      {errors.length > 0 && (
+        <div className="bg-red-50 border border-aml-red/30 rounded-lg p-3 mb-6">
+          {errors.map((error) => (
+            <p key={error} className="text-sm text-aml-red">
+              {error}
+            </p>
+          ))}
+        </div>
+      )}
+
       <div className="grid md:grid-cols-5 gap-6">
         <div className="md:col-span-3 space-y-4">
           <div className="bg-white rounded-lg border border-gray-200 p-5">
@@ -63,29 +135,57 @@ export function PaymentPage() {
             <div className="space-y-4">
               <Input
                 label={de.payment.cardHolder}
-                value={booking.payment.cardHolder}
-                onChange={(e) => updatePayment({ cardHolder: e.target.value })}
+                value={payment.cardHolder}
+                onChange={(e) =>
+                  setPayment((prev) => ({ ...prev, cardHolder: e.target.value }))
+                }
                 placeholder="Max Mustermann"
+                autoComplete="cc-name"
+                disabled={processing}
               />
               <Input
                 label={de.payment.cardNumber}
-                value={booking.payment.cardNumber}
-                onChange={(e) => updatePayment({ cardNumber: e.target.value })}
+                value={payment.cardNumber}
+                onChange={(e) =>
+                  setPayment((prev) => ({
+                    ...prev,
+                    cardNumber: e.target.value.replace(/[^\d ]/g, '').slice(0, 23),
+                  }))
+                }
                 placeholder="1234 5678 9012 3456"
+                autoComplete="cc-number"
+                inputMode="numeric"
+                disabled={processing}
               />
               <div className="grid grid-cols-2 gap-4">
                 <Input
                   label={de.payment.expiry}
-                  value={booking.payment.expiry}
-                  onChange={(e) => updatePayment({ expiry: e.target.value })}
+                  value={payment.expiry}
+                  onChange={(e) =>
+                    setPayment((prev) => ({
+                      ...prev,
+                      expiry: normalizeExpiryInput(e.target.value),
+                    }))
+                  }
                   placeholder="MM/JJ"
+                  autoComplete="cc-exp"
+                  inputMode="numeric"
+                  disabled={processing}
                 />
                 <Input
                   label={de.payment.cvv}
-                  value={booking.payment.cvv}
-                  onChange={(e) => updatePayment({ cvv: e.target.value })}
+                  value={payment.cvv}
+                  onChange={(e) =>
+                    setPayment((prev) => ({
+                      ...prev,
+                      cvv: e.target.value.replace(/\D/g, '').slice(0, 4),
+                    }))
+                  }
                   placeholder="123"
+                  autoComplete="cc-csc"
+                  inputMode="numeric"
                   type="password"
+                  disabled={processing}
                 />
               </div>
             </div>

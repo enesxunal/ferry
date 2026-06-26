@@ -1,4 +1,4 @@
-import { Minus, Plus, PawPrint, User } from 'lucide-react'
+import { Minus, PawPrint, Plus, User } from '@phosphor-icons/react'
 import { de } from '../../i18n/de'
 import type { PassengerCounts } from '../../types/booking'
 import { Button } from '../ui/Button'
@@ -44,6 +44,11 @@ function CounterRow({ label, value, min = 0, max = 9, onChange, icon }: CounterR
   )
 }
 
+function clampNumber(value: number, min: number, max: number): number {
+  if (!Number.isFinite(value)) return min
+  return Math.min(max, Math.max(min, value))
+}
+
 interface PassengerSelectorProps {
   passengers: PassengerCounts
   childAges: number[]
@@ -69,7 +74,7 @@ export function PassengerSelector({
 
   const updateChildAge = (index: number, age: number) => {
     const ages = [...childAges]
-    ages[index] = age
+    ages[index] = clampNumber(age, 4, 11)
     onChange(passengers, ages)
   }
 
@@ -125,6 +130,7 @@ export function PassengerSelector({
                 type="number"
                 min={4}
                 max={11}
+                step={1}
                 value={childAges[i] ?? ''}
                 onChange={(e) => updateChildAge(i, Number(e.target.value))}
                 className="w-full max-w-[120px] rounded border border-gray-300 px-3 py-2 text-sm"

@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TripSummarySidebar } from '../components/booking/TripSummarySidebar'
@@ -59,6 +59,14 @@ const documentOptions = [
   { value: 'Führerschein', label: 'Führerschein' },
 ]
 
+function isFilled(value: string): boolean {
+  return value.trim().length > 0
+}
+
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+}
+
 export function BookingDetailsPage() {
   const navigate = useNavigate()
   const { booking, setPassengers, updateContact } = useBooking()
@@ -84,19 +92,43 @@ export function BookingDetailsPage() {
   const handleContinue = () => {
     const errs: string[] = []
     passengers.forEach((p, i) => {
-      if (!p.firstName || !p.lastName || !p.birthDate || !p.birthPlace) {
+      const requiredFields = [
+        p.firstName,
+        p.lastName,
+        p.birthDate,
+        p.birthPlace,
+        p.nationality,
+        p.documentType,
+        p.documentNumber,
+        p.documentExpiry,
+      ]
+
+      if (!requiredFields.every(isFilled)) {
         errs.push(`${de.booking.passenger} ${i + 1}: ${de.validation.required}`)
       }
     })
-    if (!booking.contact.email) errs.push(de.booking.email)
-    if (booking.contact.email !== booking.contact.confirmEmail) {
+    const email = booking.contact.email.trim()
+    const confirmEmail = booking.contact.confirmEmail.trim()
+    if (!email) errs.push(de.booking.email)
+    else if (!isValidEmail(email)) errs.push('E-Mail: Bitte geben Sie eine gueltige Adresse ein')
+    if (email !== confirmEmail) {
       errs.push(de.validation.emailMismatch)
     }
 
     setErrors(errs)
     if (errs.length > 0) return
 
-    setPassengers(passengers)
+    setPassengers(
+      passengers.map((passenger) => ({
+        ...passenger,
+        firstName: passenger.firstName.trim(),
+        lastName: passenger.lastName.trim(),
+        birthPlace: passenger.birthPlace.trim(),
+        nationality: passenger.nationality.trim(),
+        documentNumber: passenger.documentNumber.trim(),
+      })),
+    )
+    updateContact({ email, confirmEmail })
     navigate('/payment')
   }
 

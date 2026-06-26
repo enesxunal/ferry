@@ -7,14 +7,14 @@ import {
   isBefore,
   isSameDay,
   isSameMonth,
-  parseISO,
   startOfMonth,
   startOfWeek,
   subMonths,
 } from 'date-fns'
 import { de as deLocale } from 'date-fns/locale'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { CaretLeft, CaretRight } from '@phosphor-icons/react'
 import { useEffect, useRef, useState } from 'react'
+import { parseValidISODate } from '../../utils/date'
 
 interface DatePickerDropdownProps {
   open: boolean
@@ -90,7 +90,7 @@ export function DatePickerDropdown({
   onChange,
   label,
 }: DatePickerDropdownProps) {
-  const selected = value ? parseISO(value) : null
+  const selected = parseValidISODate(value)
   const [viewMonth, setViewMonth] = useState(selected ?? new Date())
   const ref = useRef<HTMLDivElement>(null)
   const minDate = new Date()
@@ -124,14 +124,14 @@ export function DatePickerDropdown({
           onClick={() => setViewMonth(subMonths(viewMonth, 1))}
           className="p-1 hover:bg-aml-grey rounded"
         >
-          <ChevronLeft className="w-4 h-4 text-aml-blue" />
+          <CaretLeft className="w-4 h-4 text-aml-blue" />
         </button>
         <button
           type="button"
           onClick={() => setViewMonth(addMonths(viewMonth, 1))}
           className="p-1 hover:bg-aml-grey rounded"
         >
-          <ChevronRight className="w-4 h-4 text-aml-blue" />
+          <CaretRight className="w-4 h-4 text-aml-blue" />
         </button>
       </div>
       <div className="flex gap-4 flex-col sm:flex-row overflow-x-auto">

@@ -1,4 +1,4 @@
-import { Car, Check, Info, Truck } from 'lucide-react'
+import { Car, Check, Info, Truck } from '@phosphor-icons/react'
 import { de } from '../../i18n/de'
 import { trailerTypes, vehicleTypes } from '../../data/mockPorts'
 import type { VehicleData } from '../../types/booking'
@@ -91,6 +91,18 @@ function CarDimensionVisual({ type }: { type: 'length' | 'height' }) {
   )
 }
 
+function parseOptionalNonNegativeNumber(value: string): number | '' {
+  if (!value) return ''
+  const parsed = Number(value)
+  if (!Number.isFinite(parsed)) return ''
+  return Math.max(0, parsed)
+}
+
+function clampNumber(value: number, min: number, max: number): number {
+  if (!Number.isFinite(value)) return min
+  return Math.min(max, Math.max(min, value))
+}
+
 export function VehicleSelector({
   vehicle,
   onChange,
@@ -145,8 +157,11 @@ export function VehicleSelector({
               <p className="text-xs font-medium text-aml-blue text-center mb-1">{de.vehicle.length}</p>
               <input
                 type="number"
+                min={0}
                 value={vehicle.length}
-                onChange={(e) => update({ length: e.target.value ? Number(e.target.value) : '' })}
+                onChange={(e) =>
+                  update({ length: parseOptionalNonNegativeNumber(e.target.value) })
+                }
                 placeholder="cm"
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-center outline-none focus:border-aml-blue"
               />
@@ -156,8 +171,11 @@ export function VehicleSelector({
               <p className="text-xs font-medium text-aml-blue text-center mb-1">{de.vehicle.height}</p>
               <input
                 type="number"
+                min={0}
                 value={vehicle.height}
-                onChange={(e) => update({ height: e.target.value ? Number(e.target.value) : '' })}
+                onChange={(e) =>
+                  update({ height: parseOptionalNonNegativeNumber(e.target.value) })
+                }
                 placeholder="cm"
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-center outline-none focus:border-aml-blue"
               />
@@ -182,18 +200,20 @@ export function VehicleSelector({
             <div className="grid grid-cols-2 gap-3">
               <input
                 type="number"
+                min={0}
                 value={vehicle.trailerLength}
                 onChange={(e) =>
-                  update({ trailerLength: e.target.value ? Number(e.target.value) : '' })
+                  update({ trailerLength: parseOptionalNonNegativeNumber(e.target.value) })
                 }
                 placeholder={`${de.vehicle.trailer} Länge`}
                 className="border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-aml-blue"
               />
               <input
                 type="number"
+                min={0}
                 value={vehicle.trailerHeight}
                 onChange={(e) =>
-                  update({ trailerHeight: e.target.value ? Number(e.target.value) : '' })
+                  update({ trailerHeight: parseOptionalNonNegativeNumber(e.target.value) })
                 }
                 placeholder={`${de.vehicle.trailer} Höhe`}
                 className="border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-aml-blue"
@@ -212,7 +232,7 @@ export function VehicleSelector({
           min={0}
           max={10}
           value={vehicle.bicycles}
-          onChange={(e) => update({ bicycles: Number(e.target.value) })}
+          onChange={(e) => update({ bicycles: clampNumber(Number(e.target.value), 0, 10) })}
           className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-aml-blue"
         />
       </div>

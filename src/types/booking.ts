@@ -90,13 +90,6 @@ export interface ContactInfo {
   confirmEmail: string
 }
 
-export interface PaymentInfo {
-  cardHolder: string
-  cardNumber: string
-  expiry: string
-  cvv: string
-}
-
 export interface SelectedFerries {
   outbound: FerryOffer | null
   return: FerryOffer | null
@@ -106,6 +99,5 @@ export interface FullBooking extends BookingSearch {
   selectedFerries: SelectedFerries
   passengers: PassengerInfo[]
   contact: ContactInfo
-  payment: PaymentInfo
   bookingReference?: string
 }

@@ -1,4 +1,4 @@
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart } from '@phosphor-icons/react'
 import { useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { DateRibbon } from '../components/booking/DateRibbon'

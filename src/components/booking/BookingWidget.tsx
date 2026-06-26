@@ -1,4 +1,4 @@
-import { Anchor, Calendar, Car, Search, Users } from 'lucide-react'
+import { Boat as BoatIcon, CalendarBlank as CalendarIcon, Car, MagnifyingGlass, Users } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useBooking } from '../../context/BookingContext'
@@ -57,7 +57,7 @@ export function BookingWidget() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-gray-100 w-full max-w-[400px] relative z-20">
+    <div className="bg-aml-blue/5 rounded-2xl shadow-xl border border-gray-100 w-full max-w-[400px] relative z-20">
       <div className="flex gap-2 p-4 pb-0">
         {(['roundtrip', 'oneway'] as const).map((type) => (
           <button
@@ -67,7 +67,7 @@ export function BookingWidget() {
             className={`flex-1 py-2.5 rounded-lg text-sm font-semibold border-2 transition-colors ${
               booking.tripType === type
                 ? 'bg-aml-blue text-white border-aml-blue'
-                : 'bg-white text-gray-600 border-gray-200 hover:border-aml-blue/40'
+                : 'bg-white text-gray-600 border-gray-200 hover:border-aml-yellow'
             }`}
           >
             {de.tripType[type]}
@@ -96,7 +96,7 @@ export function BookingWidget() {
                 value={getRouteLabel(booking.outbound.routeFrom, booking.outbound.routeTo)}
                 onClick={() => toggle('outboundRoute')}
                 active={activeModal === 'outboundRoute'}
-                icon={<Anchor className="w-5 h-5" />}
+                icon={<BoatIcon size={32} />}
               />
               <RoutePickerDropdown
                 open={activeModal === 'outboundRoute'}
@@ -113,7 +113,7 @@ export function BookingWidget() {
                 value={booking.outbound.date ? formatGermanDate(booking.outbound.date) : ''}
                 onClick={() => toggle('outboundDate')}
                 active={activeModal === 'outboundDate'}
-                icon={<Calendar className="w-5 h-5" />}
+                icon={<CalendarIcon size={32} />}
               />
               <DatePickerDropdown
                 open={activeModal === 'outboundDate'}
@@ -137,7 +137,7 @@ export function BookingWidget() {
                   value={getRouteLabel(booking.returnLeg.routeFrom, booking.returnLeg.routeTo)}
                   onClick={() => toggle('returnRoute')}
                   active={activeModal === 'returnRoute'}
-                  icon={<Anchor className="w-5 h-5" />}
+                  icon={<BoatIcon size={32} />}
                 />
                 <RoutePickerDropdown
                   open={activeModal === 'returnRoute'}
@@ -154,7 +154,7 @@ export function BookingWidget() {
                   value={booking.returnLeg.date ? formatGermanDate(booking.returnLeg.date) : ''}
                   onClick={() => toggle('returnDate')}
                   active={activeModal === 'returnDate'}
-                  icon={<Calendar className="w-5 h-5" />}
+                  icon={<CalendarIcon size={32} />}
                 />
                 <DatePickerDropdown
                   open={activeModal === 'returnDate'}
@@ -209,7 +209,7 @@ export function BookingWidget() {
         </div>
 
         <Button onClick={handleSearch} size="lg" className="w-full uppercase tracking-wide">
-          <Search className="w-5 h-5" />
+          <MagnifyingGlass className="w-5 h-5" />
           {de.search}
         </Button>
       </div>

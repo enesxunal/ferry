@@ -1,9 +1,10 @@
-import { format, parseISO } from 'date-fns'
+import { format } from 'date-fns'
 import { de as deLocale } from 'date-fns/locale'
-import { Car, PawPrint, User } from 'lucide-react'
+import { Car, PawPrint, User } from '@phosphor-icons/react'
 import { useBooking } from '../../context/BookingContext'
 import { getRouteLabel } from '../../data/mockPorts'
 import { de } from '../../i18n/de'
+import { parseValidISODate } from '../../utils/date'
 
 export function TripSummarySidebar() {
   const { booking } = useBooking()
@@ -19,7 +20,8 @@ export function TripSummarySidebar() {
   ) => {
     if (!ferry) return null
 
-    const dayDep = format(parseISO(date), 'EEEE dd MMMM', { locale: deLocale })
+    const parsedDate = parseValidISODate(date)
+    const dayDep = parsedDate ? format(parsedDate, 'EEEE dd MMMM', { locale: deLocale }) : ''
     const dayArr = dayDep
 
     return (

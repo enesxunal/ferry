@@ -1,4 +1,4 @@
-import { CheckCircle, Download, Ship } from 'lucide-react'
+import { Boat, CheckCircle, Download } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
 import { Stepper } from '../components/ui/Stepper'
@@ -27,7 +27,7 @@ export function ConfirmationPage() {
         {booking.selectedFerries.outbound && (
           <div className="text-left bg-gray-50 rounded-lg p-4 mb-4 text-sm">
             <div className="flex items-center gap-2 font-semibold text-aml-blue mb-2">
-              <Ship className="w-4 h-4" />
+              <Boat className="w-4 h-4" />
               {de.payment.outbound}
             </div>
             <p>
@@ -47,7 +47,7 @@ export function ConfirmationPage() {
         {booking.selectedFerries.return && (
           <div className="text-left bg-gray-50 rounded-lg p-4 mb-4 text-sm">
             <div className="flex items-center gap-2 font-semibold text-aml-blue mb-2">
-              <Ship className="w-4 h-4" />
+              <Boat className="w-4 h-4" />
               {de.payment.return}
             </div>
             <p>

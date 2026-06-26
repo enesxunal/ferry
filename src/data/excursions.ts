@@ -1,16 +1,16 @@
 import {
+  Boat,
   Bus,
   Check,
-  Ship,
+  ForkKnife,
   Ticket,
-  Utensils,
   User,
   Van,
-} from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
+} from '@phosphor-icons/react'
+import type { Icon } from '@phosphor-icons/react'
 
 interface ExcursionFeature {
-  icon: LucideIcon
+  icon: Icon
   text: string
 }
 
@@ -31,7 +31,7 @@ export const excursions: Excursion[] = [
     image: '/excursions/excursion-1.jpg',
     category: 'HIN- UND RÜCKFAHRT NACH TANGER',
     title: 'Auf eigene Faust',
-    features: [{ icon: Ship, text: 'Fähre ab Tarifa' }],
+    features: [{ icon: Boat, text: 'Fähre ab Tarifa' }],
     priceFrom: 76,
     currency: 'EUR',
   },
@@ -42,10 +42,10 @@ export const excursions: Excursion[] = [
     category: 'TAGESAUSFLÜGE',
     title: 'Wunder von Tanger',
     features: [
-      { icon: Ship, text: 'Fähre ab Tarifa' },
+      { icon: Boat, text: 'Fähre ab Tarifa' },
       { icon: Bus, text: 'Transfers' },
       { icon: User, text: 'Geführte Tour' },
-      { icon: Utensils, text: 'Mittagessen' },
+      { icon: ForkKnife, text: 'Mittagessen' },
     ],
     priceFrom: 89,
     currency: 'EUR',
@@ -57,10 +57,10 @@ export const excursions: Excursion[] = [
     category: 'TAGESAUSFLÜGE',
     title: 'VIP Tagesausflug',
     features: [
-      { icon: Ship, text: 'Fähre ab Tarifa' },
+      { icon: Boat, text: 'Fähre ab Tarifa' },
       { icon: Van, text: 'VIP Transfers' },
       { icon: Ticket, text: 'Exklusive Tour (bis 6 Personen)' },
-      { icon: Utensils, text: 'Mittagessen' },
+      { icon: ForkKnife, text: 'Mittagessen' },
       { icon: Check, text: 'VIP Erlebnis' },
     ],
     priceFrom: 180,

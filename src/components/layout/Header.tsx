@@ -1,4 +1,4 @@
-import { Anchor, Menu } from 'lucide-react'
+import { Anchor, List } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import { de } from '../../i18n/de'
 
@@ -27,7 +27,7 @@ export function Header() {
         </nav>
 
         <button type="button" className="md:hidden p-2">
-          <Menu className="w-6 h-6" />
+          <List className="w-6 h-6" />
         </button>
       </div>
     </header>

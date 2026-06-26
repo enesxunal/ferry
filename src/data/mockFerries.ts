@@ -1,6 +1,7 @@
-import { addDays, format, parseISO } from 'date-fns'
+import { addDays, format } from 'date-fns'
 import { de as deLocale } from 'date-fns/locale'
 import type { FerryOffer } from '../types/booking'
+import { parseValidISODate } from '../utils/date'
 import { operators } from './mockPorts'
 
 const amenitiesPool = [
@@ -68,6 +69,11 @@ export function searchFerries(
   returnDate: string,
   tripType: 'roundtrip' | 'oneway',
 ): { outbound: FerryOffer[]; return: FerryOffer[] } {
+  const hasOutbound = outboundFrom && outboundTo && parseValidISODate(outboundDate)
+  const hasReturn =
+    tripType === 'oneway' || (returnFrom && returnTo && parseValidISODate(returnDate))
+  if (!hasOutbound || !hasReturn) return { outbound: [], return: [] }
+
   const outbound = generateOffers(outboundFrom, outboundTo, outboundDate, 'outbound')
   const returnOffers =
     tripType === 'roundtrip'
@@ -92,22 +98,23 @@ export function getPortName(portId: string, portList: { id: string; name: string
 }
 
 export function formatGermanDate(dateStr: string): string {
-  if (!dateStr) return ''
-  return format(parseISO(dateStr), 'dd/MM/yyyy')
+  const date = parseValidISODate(dateStr)
+  return date ? format(date, 'dd/MM/yyyy') : ''
 }
 
 export function formatGermanDateShort(dateStr: string): string {
-  if (!dateStr) return ''
-  return format(parseISO(dateStr), 'dd.MM.yyyy')
+  const date = parseValidISODate(dateStr)
+  return date ? format(date, 'dd.MM.yyyy') : ''
 }
 
 export function formatGermanDayDate(dateStr: string): string {
-  if (!dateStr) return ''
-  return format(parseISO(dateStr), 'EEEE dd MMMM', { locale: deLocale })
+  const date = parseValidISODate(dateStr)
+  return date ? format(date, 'EEEE dd MMMM', { locale: deLocale }) : ''
 }
 
 export function getDateRange(centerDate: string, range = 3): string[] {
-  const center = parseISO(centerDate)
+  const center = parseValidISODate(centerDate)
+  if (!center) return []
   return Array.from({ length: range * 2 + 1 }, (_, i) =>
     format(addDays(center, i - range), 'yyyy-MM-dd'),
   )
