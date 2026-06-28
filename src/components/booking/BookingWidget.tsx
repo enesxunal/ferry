@@ -1,5 +1,10 @@
-import { Boat as BoatIcon, CalendarBlank as CalendarIcon, Car, MagnifyingGlass, Users } from '@phosphor-icons/react'
 import { useState } from 'react'
+import autoIcon from '../../assets/auto.svg'
+import boatIcon from '../../assets/boat.svg'
+import calendarIcon from '../../assets/calender.svg'
+import loopeIcon from '../../assets/loope.svg'
+import passengerIcon from '../../assets/passenger.svg'
+import returnArrowsIcon from '../../assets/pfeile.svg'
 import { useNavigate } from 'react-router-dom'
 import { useBooking } from '../../context/BookingContext'
 import { vehicleTypes, getRouteLabel } from '../../data/mockPorts'
@@ -96,7 +101,14 @@ export function BookingWidget() {
                 value={getRouteLabel(booking.outbound.routeFrom, booking.outbound.routeTo)}
                 onClick={() => toggle('outboundRoute')}
                 active={activeModal === 'outboundRoute'}
-                icon={<BoatIcon size={32} />}
+                icon={
+                  <img
+                    src={boatIcon}
+                    alt=""
+                    aria-hidden="true"
+                    className="block h-10 w-14 object-contain"
+                  />
+                }
               />
               <RoutePickerDropdown
                 open={activeModal === 'outboundRoute'}
@@ -113,7 +125,14 @@ export function BookingWidget() {
                 value={booking.outbound.date ? formatGermanDate(booking.outbound.date) : ''}
                 onClick={() => toggle('outboundDate')}
                 active={activeModal === 'outboundDate'}
-                icon={<CalendarIcon size={32} />}
+                icon={
+                  <img
+                    src={calendarIcon}
+                    alt=""
+                    aria-hidden="true"
+                    className="block h-10 w-14 object-contain"
+                  />
+                }
               />
               <DatePickerDropdown
                 open={activeModal === 'outboundDate'}
@@ -128,7 +147,15 @@ export function BookingWidget() {
 
         {booking.tripType === 'roundtrip' && (
           <div>
-            <p className="text-sm font-semibold text-aml-blue mb-2">{de.return}</p>
+            <p className="text-sm font-semibold text-aml-blue mb-2 flex items-center gap-2">
+              {de.return}
+              <img
+                src={returnArrowsIcon}
+                alt=""
+                aria-hidden="true"
+                className="block h-10 w-14 object-contain"
+              />
+            </p>
             <div className="space-y-2">
               <div className="relative">
                 <RouteFieldButton
@@ -137,7 +164,14 @@ export function BookingWidget() {
                   value={getRouteLabel(booking.returnLeg.routeFrom, booking.returnLeg.routeTo)}
                   onClick={() => toggle('returnRoute')}
                   active={activeModal === 'returnRoute'}
-                  icon={<BoatIcon size={32} />}
+                  icon={
+                    <img
+                      src={boatIcon}
+                      alt=""
+                      aria-hidden="true"
+                      className="block h-10 w-14 -scale-x-100 object-contain"
+                    />
+                  }
                 />
                 <RoutePickerDropdown
                   open={activeModal === 'returnRoute'}
@@ -154,7 +188,14 @@ export function BookingWidget() {
                   value={booking.returnLeg.date ? formatGermanDate(booking.returnLeg.date) : ''}
                   onClick={() => toggle('returnDate')}
                   active={activeModal === 'returnDate'}
-                  icon={<CalendarIcon size={32} />}
+                  icon={
+                    <img
+                      src={calendarIcon}
+                      alt=""
+                      aria-hidden="true"
+                      className="block h-10 w-14 object-contain"
+                    />
+                  }
                 />
                 <DatePickerDropdown
                   open={activeModal === 'returnDate'}
@@ -195,7 +236,14 @@ export function BookingWidget() {
                 value={formatPassengerSummary(booking.outbound.passengers)}
               onClick={() => toggle('passengers')}
               active={activeModal === 'passengers'}
-              icon={<Users className="w-5 h-5" />}
+              icon={
+                <img
+                  src={passengerIcon}
+                  alt=""
+                  aria-hidden="true"
+                  className="block h-10 w-14 object-contain"
+                />
+              }
             />
             <RouteFieldButton
               label={de.vehicle.title}
@@ -203,13 +251,20 @@ export function BookingWidget() {
               value={vehicleSummary(booking.outbound.vehicle)}
               onClick={() => toggle('vehicle')}
               active={activeModal === 'vehicle'}
-              icon={<Car className="w-5 h-5" />}
+              icon={
+                <img
+                  src={autoIcon}
+                  alt=""
+                  aria-hidden="true"
+                  className="block h-10 w-14 object-contain"
+                />
+              }
             />
           </div>
         </div>
 
         <Button onClick={handleSearch} size="lg" className="w-full uppercase tracking-wide">
-          <MagnifyingGlass className="w-5 h-5" />
+          <img src={loopeIcon} alt="" aria-hidden="true" className="block h-10 w-14 object-contain" />
           {de.search}
         </Button>
       </div>
