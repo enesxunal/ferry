@@ -1,5 +1,6 @@
-import { ArrowRight } from '@phosphor-icons/react'
+import { MapPin } from '@phosphor-icons/react'
 import { topDestinations } from '../../data/topDestinations'
+import { GradientCtaButton } from '../ui/GradientCtaButton'
 
 export function TopDestinationsSection() {
   const { title, subtitle, main, featured, secondary } = topDestinations
@@ -31,13 +32,14 @@ export function TopDestinationsSection() {
                   </p>
                 )}
               </div>
-              <a
+              <GradientCtaButton
+                as="a"
                 href="#"
-                className="inline-flex items-center gap-1.5 bg-aml-yellow hover:bg-aml-yellow-dark text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shrink-0"
-              >
-                Entdecken
-                <ArrowRight className="w-4 h-4" />
-              </a>
+                text="Entdecken"
+                icon={<MapPin weight="bold" />}
+                size="sm"
+                className="shrink-0"
+              />
             </div>
           </div>
 
@@ -59,13 +61,14 @@ export function TopDestinationsSection() {
                   </p>
                 )}
               </div>
-              <a
+              <GradientCtaButton
+                as="a"
                 href="#"
-                className="inline-flex items-center gap-1.5 bg-aml-yellow hover:bg-aml-yellow-dark text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shrink-0"
-              >
-                Entdecken
-                <ArrowRight className="w-4 h-4" />
-              </a>
+                text="Entdecken"
+                icon={<MapPin weight="bold" />}
+                size="sm"
+                className="shrink-0"
+              />
             </div>
           </div>
 
@@ -87,13 +90,14 @@ export function TopDestinationsSection() {
                   </p>
                 )}
               </div>
-              <a
+              <GradientCtaButton
+                as="a"
                 href="#"
-                className="inline-flex items-center gap-1.5 bg-aml-yellow hover:bg-aml-yellow-dark text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shrink-0"
-              >
-                Entdecken
-                <ArrowRight className="w-4 h-4" />
-              </a>
+                text="Entdecken"
+                icon={<MapPin weight="bold" />}
+                size="sm"
+                className="shrink-0"
+              />
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { Children, isValidElement, type ButtonHTMLAttributes, type ReactNode } from 'react'
+import { GradientCtaButton } from './GradientCtaButton'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
@@ -7,16 +8,46 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
-  primary: 'bg-aml-yellow text-white hover:bg-aml-yellow-dark font-bold',
-  secondary: 'bg-aml-blue text-white hover:bg-aml-blue-dark font-semibold',
-  outline: 'border-2 border-aml-blue text-aml-blue hover:bg-aml-blue hover:text-white',
-  ghost: 'text-aml-blue hover:bg-aml-grey',
+  primary: 'font-bold',
+  secondary: 'font-semibold',
+  outline: 'font-semibold',
+  ghost: '',
+}
+
+const gradients = {
+  primary: { from: '#F9A852', to: '#007B89' },
+  secondary: { from: '#007B89', to: '#4DB8C4' },
+  outline: { from: '#F9A852', to: '#007B89' },
+  ghost: { from: '#F9A852', to: '#007B89' },
 }
 
 const sizes = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-5 py-2.5 text-base',
-  lg: 'px-8 py-3.5 text-lg',
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
+} as const
+
+function splitButtonChildren(children: ReactNode) {
+  let items = Children.toArray(children).filter(
+    (child) => child && !(typeof child === 'string' && child.trim().length === 0),
+  )
+  let icon: ReactNode
+  let rightIcon: ReactNode
+
+  if (items.length > 1 && isValidElement(items[0])) {
+    icon = items[0]
+    items = items.slice(1)
+  }
+
+  const lastItem = items[items.length - 1]
+  if (items.length > 1 && isValidElement(lastItem)) {
+    rightIcon = lastItem
+    items = items.slice(0, -1)
+  }
+
+  const text = items.length === 1 ? items[0] : items
+
+  return { icon, rightIcon, text }
 }
 
 export function Button({
@@ -26,12 +57,18 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
+  const { icon, rightIcon, text } = splitButtonChildren(children)
+
   return (
-    <button
-      className={`inline-flex items-center justify-center gap-2 rounded-md transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${sizes[size]} ${className}`}
+    <GradientCtaButton
       {...props}
-    >
-      {children}
-    </button>
+      text={text}
+      icon={icon}
+      rightIcon={rightIcon}
+      gradient={gradients[variant]}
+      size={sizes[size]}
+      className={`${variants[variant]} ${className}`}
+      disabled={props.disabled}
+    />
   )
 }

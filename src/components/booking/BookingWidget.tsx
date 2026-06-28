@@ -263,7 +263,11 @@ export function BookingWidget() {
           </div>
         </div>
 
-        <Button onClick={handleSearch} size="lg" className="w-full uppercase tracking-wide">
+        <Button
+          onClick={handleSearch}
+          size="lg"
+          className="w-full min-h-[68px] px-6 uppercase tracking-wide"
+        >
           <img src={loopeIcon} alt="" aria-hidden="true" className="block h-10 w-14 object-contain" />
           {de.search}
         </Button>

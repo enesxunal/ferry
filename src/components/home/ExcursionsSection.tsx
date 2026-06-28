@@ -1,10 +1,18 @@
-import { ArrowRight } from '@phosphor-icons/react'
+import { ArrowRight, MapPin } from '@phosphor-icons/react'
+import barokBackground from '../../assets/barok-viktoren.svg'
 import { excursions, excursionsSection } from '../../data/excursions'
+import { GradientCtaButton } from '../ui/GradientCtaButton'
 
 export function ExcursionsSection() {
   return (
-    <section className="bg-[#f5f6f8] py-12 md:py-16">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="relative overflow-hidden bg-[#f5f6f8] py-12 md:py-16">
+      <img
+        src={barokBackground}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-multiply"
+      />
+      <div className="relative z-10 max-w-6xl mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
             {excursionsSection.title}
@@ -55,13 +63,14 @@ export function ExcursionsSection() {
                       {item.priceFrom} €
                     </span>
                   </p>
-                  <a
+                  <GradientCtaButton
+                    as="a"
                     href="#"
-                    className="inline-flex items-center gap-1 bg-aml-yellow hover:bg-aml-yellow-dark text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors shrink-0"
-                  >
-                    Entdecken
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
+                    text="Entdecken"
+                    icon={<MapPin weight="bold" />}
+                    size="sm"
+                    className="shrink-0"
+                  />
                 </div>
               </div>
             </article>

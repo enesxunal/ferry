@@ -46,9 +46,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <p className="text-xs text-white/50 mt-4">
-              © 2026 {de.siteName}. Prototyp mit Mock-Daten.
-            </p>
+            <p className="text-xs text-white/50 mt-4">&copy; 2026 CONNECT FERRY</p>
           </div>
         </div>
       </div>

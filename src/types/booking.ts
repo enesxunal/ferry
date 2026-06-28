@@ -19,9 +19,13 @@ export interface VehicleData {
   hasVehicle: boolean
   type: string
   quantity: number
+  make: string
+  model: string
   brandModel: string
+  licensePlate: string
   length: number | ''
   height: number | ''
+  width: number | ''
   trailer: string
   trailerLength: number | ''
   trailerHeight: number | ''
