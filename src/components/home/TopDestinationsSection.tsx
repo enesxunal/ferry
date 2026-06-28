@@ -2,7 +2,7 @@ import { ArrowRight } from '@phosphor-icons/react'
 import { topDestinations } from '../../data/topDestinations'
 
 export function TopDestinationsSection() {
-  const { title, subtitle, mainImage, featured, secondary } = topDestinations
+  const { title, subtitle, main, featured, secondary } = topDestinations
 
   return (
     <section className="bg-white py-12 md:py-16 border-t border-gray-100">
@@ -13,16 +13,35 @@ export function TopDestinationsSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 md:gap-5 min-h-[420px]">
-          {/* Large left image */}
-          <div className="md:row-span-2 relative rounded-2xl overflow-hidden min-h-[240px] md:min-h-0">
+          {/* Large left — Barcelona */}
+          <div className="md:row-span-2 relative rounded-2xl overflow-hidden min-h-[280px] md:min-h-0 group">
             <img
-              src={mainImage}
-              alt="Hafen und Küste"
-              className="absolute inset-0 w-full h-full object-cover"
+              src={main.image}
+              alt={main.name}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
+              <div className="text-white">
+                <h3 className="text-3xl md:text-4xl font-bold">{main.name}</h3>
+                {main.priceFrom && (
+                  <p className="text-white/90 text-sm mt-1">
+                    Ab{' '}
+                    <span className="text-xl font-bold">{main.priceFrom} €</span>
+                  </p>
+                )}
+              </div>
+              <a
+                href="#"
+                className="inline-flex items-center gap-1.5 bg-aml-yellow hover:bg-aml-yellow-dark text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shrink-0"
+              >
+                Entdecken
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
 
-          {/* Featured destination — Tangier */}
+          {/* Tanger */}
           <div className="relative rounded-2xl overflow-hidden min-h-[200px]">
             <img
               src={featured.image}
@@ -42,7 +61,7 @@ export function TopDestinationsSection() {
               </div>
               <a
                 href="#"
-                className="inline-flex items-center gap-1.5 bg-[#e85d2c] hover:bg-[#d4521f] text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shrink-0"
+                className="inline-flex items-center gap-1.5 bg-aml-yellow hover:bg-aml-yellow-dark text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shrink-0"
               >
                 Entdecken
                 <ArrowRight className="w-4 h-4" />
@@ -50,16 +69,31 @@ export function TopDestinationsSection() {
             </div>
           </div>
 
-          {/* Secondary destination */}
+          {/* Tunis */}
           <div className="relative rounded-2xl overflow-hidden min-h-[200px] group">
             <img
               src={secondary.image}
               alt={secondary.name}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-            <div className="absolute bottom-4 left-5">
-              <h3 className="text-xl font-bold text-white">{secondary.name}</h3>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
+              <div className="text-white">
+                <h3 className="text-xl md:text-2xl font-bold">{secondary.name}</h3>
+                {secondary.priceFrom && (
+                  <p className="text-white/90 text-sm mt-1">
+                    Ab{' '}
+                    <span className="text-lg font-bold">{secondary.priceFrom} €</span>
+                  </p>
+                )}
+              </div>
+              <a
+                href="#"
+                className="inline-flex items-center gap-1.5 bg-aml-yellow hover:bg-aml-yellow-dark text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shrink-0"
+              >
+                Entdecken
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>

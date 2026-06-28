@@ -62,7 +62,7 @@ export function BookingWidget() {
   }
 
   return (
-    <div className="bg-aml-blue/5 rounded-2xl shadow-xl border border-gray-100 w-full max-w-[400px] relative z-20">
+    <div className="bg-white rounded-2xl shadow-xl border border-gray-100 w-full max-w-[400px] relative z-20">
       <div className="flex gap-2 p-4 pb-0">
         {(['roundtrip', 'oneway'] as const).map((type) => (
           <button
@@ -72,7 +72,7 @@ export function BookingWidget() {
             className={`flex-1 py-2.5 rounded-lg text-sm font-semibold border-2 transition-colors ${
               booking.tripType === type
                 ? 'bg-aml-blue text-white border-aml-blue'
-                : 'bg-white text-gray-600 border-gray-200 hover:border-aml-yellow'
+                : 'bg-white text-gray-600 border-gray-200 hover:border-aml-blue/50'
             }`}
           >
             {de.tripType[type]}

@@ -235,7 +235,7 @@ export function PaymentPage() {
             )}
 
             {booking.discountCode && (
-              <div className="text-sm mb-3 pb-3 border-b text-aml-green">
+              <div className="text-sm mb-3 pb-3 border-b text-aml-blue">
                 {de.payment.discount}: -10%
               </div>
             )}

@@ -39,7 +39,7 @@ export function DateRibbon({ centerDate, from, to, leg, onDateChange }: DateRibb
               {formatGermanDateShort(date)}
             </p>
             <p
-              className={`text-[10px] mt-0.5 ${isSelected ? 'text-aml-yellow' : 'text-aml-green font-medium'}`}
+              className={`text-[10px] mt-0.5 ${isSelected ? 'text-aml-yellow font-semibold' : 'text-aml-blue font-medium'}`}
             >
               ab {lowestPrice.toFixed(0)} €
             </p>

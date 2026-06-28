@@ -72,7 +72,7 @@ export function TripSummarySidebar() {
         </p>
         <div className="flex gap-3 mt-1 text-xs">
           <span className="text-aml-red">✓ Nicht erstattbar</span>
-          <span className="text-aml-green">✓ Änderbar</span>
+          <span className="text-aml-blue">✓ Änderbar</span>
         </div>
       </div>
     )

@@ -33,7 +33,7 @@ export function FerryResultCard({
         selected ? 'border-aml-blue shadow-md' : 'border-transparent'
       }`}
     >
-      <div className="bg-[#e8edf5] p-4 md:p-5">
+      <div className="bg-aml-blue-muted p-4 md:p-5">
         <div className="flex flex-col lg:flex-row items-stretch gap-4">
           {/* Departure */}
           <div className="lg:w-36 shrink-0">

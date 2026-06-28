@@ -13,7 +13,7 @@ export function ConfirmationPage() {
       <Stepper currentStep={3} />
 
       <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
-        <CheckCircle className="w-16 h-16 text-aml-green mx-auto mb-4" />
+        <CheckCircle className="w-16 h-16 text-aml-blue mx-auto mb-4" />
         <h1 className="text-2xl font-bold text-aml-blue mb-2">{de.confirmation.title}</h1>
         <p className="text-gray-500 mb-6">{de.confirmation.subtitle}</p>
 

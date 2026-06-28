@@ -1,8 +1,8 @@
 import { Star } from '@phosphor-icons/react'
 import { BookingWidget } from '../components/booking/BookingWidget'
 import { ExcursionsSection } from '../components/home/ExcursionsSection'
+import { HeroBanner } from '../components/home/HeroBanner'
 import { TopDestinationsSection } from '../components/home/TopDestinationsSection'
-import { MediterraneanMap } from '../components/map/MediterraneanMap'
 
 const reviews = [
   { name: 'Oliver', text: 'Gute Menüführung' },
@@ -13,8 +13,8 @@ const reviews = [
 export function HomePage() {
   return (
     <div>
-      <section className="relative min-h-[560px] overflow-hidden bg-sky-100">
-        <MediterraneanMap />
+      <section className="relative min-h-[580px] md:min-h-[620px] overflow-hidden bg-white">
+        <HeroBanner />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 py-8 md:py-10">
           <BookingWidget />

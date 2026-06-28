@@ -1,13 +1,18 @@
 import { ArrowRight } from '@phosphor-icons/react'
-import { excursions } from '../../data/excursions'
+import { excursions, excursionsSection } from '../../data/excursions'
 
 export function ExcursionsSection() {
   return (
     <section className="bg-[#f5f6f8] py-12 md:py-16">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-10">
-          Entdecken Sie Tanger
-        </h2>
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+            {excursionsSection.title}
+          </h2>
+          <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
+            {excursionsSection.subtitle}
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {excursions.map((item) => (
@@ -52,7 +57,7 @@ export function ExcursionsSection() {
                   </p>
                   <a
                     href="#"
-                    className="inline-flex items-center gap-1 bg-[#e85d2c] hover:bg-[#d4521f] text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors shrink-0"
+                    className="inline-flex items-center gap-1 bg-aml-yellow hover:bg-aml-yellow-dark text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors shrink-0"
                   >
                     Entdecken
                     <ArrowRight className="w-4 h-4" />

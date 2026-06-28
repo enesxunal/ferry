@@ -1,14 +1,19 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-aml-blue: #28367b;
-  --color-aml-blue-dark: #1e2859;
-  --color-aml-blue-light: #3a4d9e;
-  --color-aml-green: #2f9448;
-  --color-aml-yellow: #f9b000;
-  --color-aml-red: #de252a;
-  --color-aml-grey: #e6e7e8;
-  --color-aml-grey-dark: #b0b3b8;
+  /* Baleària — balearia.com (teal + orange) */
+  --color-aml-blue: #007b89;
+  --color-aml-blue-dark: #006570;
+  --color-aml-blue-light: #4db8c4;
+  --color-aml-blue-muted: #e8f4f5;
+  --color-aml-green: #007b89;
+  --color-aml-yellow: #f9a852;
+  --color-aml-yellow-dark: #e8923f;
+  --color-aml-orange: #f9a852;
+  --color-aml-orange-dark: #e8923f;
+  --color-aml-red: #d32f2f;
+  --color-aml-grey: #f5f6f8;
+  --color-aml-grey-dark: #9aa0a6;
   --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
@@ -19,7 +24,7 @@
 body {
   margin: 0;
   font-family: var(--font-sans);
-  color: #1a1a2e;
+  color: #313131;
   background: #f5f6f8;
   -webkit-font-smoothing: antialiased;
 }

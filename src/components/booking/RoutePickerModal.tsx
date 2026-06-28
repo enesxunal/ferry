@@ -112,7 +112,7 @@ export function RouteFieldButton({
       className={`w-full flex items-start gap-3 border rounded-lg px-4 py-3 text-left transition-colors bg-white ${
         active
           ? 'border-aml-blue ring-2 ring-aml-blue/20'
-          : 'border-gray-200 hover:border-aml-yellow'
+          : 'border-gray-200 hover:border-aml-blue'
       }`}
     >
       <span className="text-aml-blue mt-0.5 shrink-0">{icon}</span>

@@ -7,7 +7,7 @@ export function Header() {
     <header className="bg-aml-blue text-white shadow-md">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <Anchor className="w-7 h-7 text-aml-yellow" />
+          <Anchor className="w-7 h-7 text-aml-yellow" weight="duotone" />
           <span className="text-xl font-bold tracking-tight">{de.siteName}</span>
         </Link>
 

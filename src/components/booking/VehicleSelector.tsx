@@ -31,10 +31,10 @@ function YesNoOption({
     >
       <span
         className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
-          selected ? 'border-aml-yellow bg-aml-yellow' : 'border-gray-300 bg-white'
+          selected ? 'border-aml-blue bg-aml-blue' : 'border-gray-300 bg-white'
         }`}
       >
-        {selected && <Check className="w-3 h-3 text-aml-blue stroke-[3]" />}
+        {selected && <Check className="w-3 h-3 text-white stroke-[3]" />}
       </span>
       {label}
     </button>
